@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<facturas>
+   <factura numero="10">
+      <fecha>20012-04-23</fecha>
+      <importe>0</importe>
+	  <numcliente>20</numcliente>
+   </factura> 
+      <factura numero="11">
+      <fecha>20012-04-27</fecha>
+      <importe>0</importe>
+	  <numcliente>20</numcliente>
+   </factura> 
+     <factura numero="12">
+      <fecha>20012-05-03</fecha>
+      <importe>0</importe>
+	  <numcliente>30</numcliente>
+   </factura> 
+     <factura numero="13">
+      <fecha>20012-05-08</fecha>
+      <importe>0</importe>
+	  <numcliente>30</numcliente>
+   </factura> 
+</facturas>
+

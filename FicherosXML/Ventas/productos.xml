@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<productos>
+   <product  categoria="A" pvp="100">
+      <codigo>1</codigo>
+      <nombre>Silla Plegable</nombre>
+	  <stock>300</stock>
+   </product> 
+      <product  categoria="A" pvp="900">
+      <codigo>2</codigo>
+      <nombre>BH Prisma</nombre>
+	  <stock>10</stock>
+   </product> 
+   <product  categoria="B" pvp="10">
+      <codigo>3</codigo>
+      <nombre>Ratón ergonómico</nombre>
+	  <stock>30</stock>
+   </product> 
+   <product  categoria="B" pvp="70">
+      <codigo>4</codigo>
+      <nombre>Caja herramientas</nombre>
+	  <stock>10</stock>
+   </product> 
+     <product  categoria="C" pvp="90">
+      <codigo>5</codigo>
+      <nombre>Maillot santini</nombre>
+	  <stock>25</stock>
+   </product> 
+   <product  categoria="A" pvp="50">
+      <codigo>6</codigo>
+      <nombre>Cadena Plegable</nombre>
+	  <stock>3</stock>
+   </product> 
+</productos>
+

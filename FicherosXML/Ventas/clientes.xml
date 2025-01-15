@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<clientes>
+   <clien numero="10">
+      <nombre>Alicia Díaz</nombre>
+      <poblacion>Madrid</poblacion>
+	  <tlf>912233445</tlf>
+	  <direccion>Avda Los Alfares 10</direccion>
+   </clien> 
+   <clien numero="20">
+      <nombre>Pilar Martín</nombre>
+      <poblacion>Cáceres</poblacion>
+	  <tlf>927233445</tlf>
+	  <direccion>Avda de Madrid 2</direccion>
+   </clien> 
+   <clien numero="30">
+      <nombre>Antonio Reus</nombre>
+      <poblacion>Madrid</poblacion>
+	  <tlf>913344665</tlf>
+	  <direccion>C/ Las Moreras 23</direccion>
+   </clien> 
+   <clien numero="40">
+      <nombre>Pablo Hernández</nombre>
+      <poblacion>Talavera</poblacion>
+	  <tlf>925993445</tlf>
+	  <direccion>C/ Pio XII 15</direccion>
+   </clien> 
+</clientes>
+

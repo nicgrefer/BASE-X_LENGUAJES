@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<facturastotal>
+<factura numero="10" codigo="FACT10">
+    <articulo codigo="1">
+        <nombre>Silla Plegable</nombre>
+        <cant>10</cant>
+        <pvp>100</pvp>
+        <importe>1000</importe>
+    </articulo>
+    <articulo codigo="2">
+        <nombre>BH Prisma</nombre>
+        <cant>3</cant>
+        <pvp>900</pvp>
+        <importe>2700</importe>
+    </articulo>
+    <articulo codigo="3">
+        <nombre>Ratón ergonómico</nombre>
+        <cant>3</cant>
+        <pvp>10</pvp>
+        <importe>30</importe>
+    </articulo>
+    <articulo codigo="3">
+        <nombre>Ratón ergonómico</nombre>
+        <cant>30</cant>
+        <pvp>10</pvp>
+        <importe>300</importe>
+    </articulo>
+</factura>
+<factura numero="11" codigo="FACT11">
+    <articulo codigo="1">
+        <nombre>Silla Plegable</nombre>
+        <cant>1</cant>
+        <pvp>100</pvp>
+        <importe>100</importe>
+    </articulo>
+    <articulo codigo="2">
+        <nombre>BH Prisma</nombre>
+        <cant>4</cant>
+        <pvp>900</pvp>
+        <importe>3600</importe>
+    </articulo>
+    <articulo codigo="3">
+        <nombre>Ratón ergonómico</nombre>
+        <cant>3</cant>
+        <pvp>10</pvp>
+        <importe>30</importe>
+    </articulo>
+    <articulo codigo="5">
+        <nombre>Maillot santini</nombre>
+        <cant>3</cant>
+        <pvp>90</pvp>
+        <importe>270</importe>
+    </articulo>
+    <articulo codigo="6">
+        <nombre>Cadena Plegable</nombre>
+        <cant>3</cant>
+        <pvp>50</pvp>
+        <importe>150</importe>
+    </articulo>
+</factura>
+<factura numero="12" codigo="FACT12">
+    <articulo codigo="4">
+        <nombre>Caja herramientas</nombre>
+        <cant>1</cant>
+        <pvp>70</pvp>
+        <importe>70</importe>
+    </articulo>
+    <articulo codigo="5">
+        <nombre>Maillot santini</nombre>
+        <cant>3</cant>
+        <pvp>90</pvp>
+        <importe>270</importe>
+    </articulo>
+    <articulo codigo="6">
+        <nombre>Cadena Plegable</nombre>
+        <cant>4</cant>
+        <pvp>50</pvp>
+        <importe>200</importe>
+    </articulo>
+    <articulo codigo="2">
+        <nombre>BH Prisma</nombre>
+        <cant>2</cant>
+        <pvp>900</pvp>
+        <importe>1800</importe>
+    </articulo>
+</factura>
+<factura numero="13" codigo="FACT13">
+    <articulo codigo="2">
+        <nombre>BH Prisma</nombre>
+        <cant>3</cant>
+        <pvp>900</pvp>
+        <importe>2700</importe>
+    </articulo>
+    <articulo codigo="5">
+        <nombre>Maillot santini</nombre>
+        <cant>6</cant>
+        <pvp>90</pvp>
+        <importe>540</importe>
+    </articulo>
+</factura>
+</facturastotal>

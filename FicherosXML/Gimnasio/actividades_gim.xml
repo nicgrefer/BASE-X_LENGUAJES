@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<ACTIVIDADES_GIM>
+<fila_actividades cod="10" tipo="1">
+  <NOMBRE>Aparatos</NOMBRE>
+</fila_actividades>
+<fila_actividades cod="11" tipo="1">
+  <NOMBRE>Piscina</NOMBRE>
+</fila_actividades>
+<fila_actividades cod="20" tipo="2">
+  <NOMBRE>Aerobic</NOMBRE>
+</fila_actividades>
+<fila_actividades cod="21" tipo="2">
+  <NOMBRE>Pilates</NOMBRE>
+</fila_actividades >
+<fila_actividades cod="22" tipo="2">
+  <NOMBRE>Spinning</NOMBRE>
+</fila_actividades>
+<fila_actividades cod="31" tipo="3">
+  <NOMBRE>Padel</NOMBRE>
+</fila_actividades>
+  <fila_actividades cod="32" tipo="3">
+  <NOMBRE>Tenis</NOMBRE>
+</fila_actividades>
+</ACTIVIDADES_GIM>

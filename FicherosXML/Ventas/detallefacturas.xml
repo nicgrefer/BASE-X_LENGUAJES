@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<detallefacturas>
+   <factura numero="10">
+      <codigo>FACT10</codigo>
+      <producto descuento="0.20">
+         <codigo>1</codigo>
+         <unidades>10</unidades>
+      </producto>
+	  <producto descuento="0.15">
+         <codigo>2</codigo>
+         <unidades>3</unidades>
+      </producto>
+      <producto descuento="0.10">
+         <codigo>3</codigo>
+         <unidades>3</unidades>
+      </producto>
+   </factura>
+    <factura numero="11">
+      <codigo>FACT11</codigo>
+      <producto descuento="0.20">
+         <codigo>1</codigo>
+         <unidades>1</unidades>
+      </producto>
+	  <producto descuento="0.15">
+         <codigo>2</codigo>
+         <unidades>4</unidades>
+      </producto>
+      <producto descuento="0.30">
+         <codigo>3</codigo>
+         <unidades>3</unidades>
+      </producto>
+	  <producto descuento="0.20">
+         <codigo>5</codigo>
+         <unidades>3</unidades>
+      </producto>
+	  <producto descuento="0.15">
+         <codigo>6</codigo>
+         <unidades>3</unidades>
+      </producto>
+   </factura>
+    <factura numero="12">
+      <codigo>FACT12</codigo>
+      <producto descuento="0.10">
+         <codigo>4</codigo>
+         <unidades>1</unidades>
+      </producto>
+	  <producto descuento="0">
+         <codigo>5</codigo>
+         <unidades>3</unidades>
+      </producto>
+      <producto descuento="0.10">
+         <codigo>6</codigo>
+         <unidades>4</unidades>
+      </producto>
+	  <producto descuento="0.15">
+         <codigo>2</codigo>
+         <unidades>2</unidades>
+      </producto>
+	</factura>
+    <factura numero="13">
+      <codigo>FACT13</codigo>
+      <producto descuento="0.15">
+         <codigo>2</codigo>
+         <unidades>3</unidades>
+      </producto>
+      <producto descuento="0.05">
+         <codigo>5</codigo>
+         <unidades>6</unidades>
+      </producto>
+   </factura>
+   
+  
+</detallefacturas>
