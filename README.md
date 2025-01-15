@@ -85,7 +85,11 @@ Maximo
 
 minimo
 
+### Distinct-values
+Muestra los distintos datos que tiene una bariable ej:
 
+
+        distinct-values(//OFICIO)
 
 
 
