@@ -9,6 +9,6 @@ Se emplea el lenguaje XML
 |// | busqueda recursiva||
 | .. | retroceder a nodo padre||
 | . | seleccionar nodo actual||
-| [] | filtro para hacer búsquedas -> SE USA =/</>/!=|// DEP_ROW [LOC="SEVILLA"]|
+| [] | filtro para hacer búsquedas -> SE USA =/</>/!=/and/or|// DEP_ROW [LOC="SEVILLA"]|
 | (: texto :) | comentarios||
 
