@@ -53,6 +53,9 @@ Mostrar los números de los empleados cullos apellidos tengan una "s"
 Que empiece por...
 
     //EMP_ROW [starts-with(APELLIDO,'S')]/EMP_NO
+### Number
+Para pasar de un elemento plano de estilo texto a numero (de String -> int)
+
 
 ## Funciones de Agrupación
 
