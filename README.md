@@ -105,10 +105,40 @@ Muestra los distintos datos que tiene una bariable ej:
 [[https://github.com/eXist-db/exist/releases]]
 1. Descargamos el .jar
 2. Open java admin....
-3. Contraseña pasv0r
+3. Contraseña Pasv0r
 
 >[!TIP]
 > Para añadir un archibo **XML** --> Crear nueva coleccion (aagregar nombre) --> Almacenar uno o mas ficheros (estando dentro de le coleccion) --> Usar los prismaticos para hacer consultas   
 
+---
+
+# XQuery
+
+Para hacer consultas de estilo *FLWOR* (LEIDO COMO FLOWER). A diferencia del XPad en este se puede manipilar, transformar y editar
 
 
+    for <variable> in <expresión XPath> 
+    let <variables vinculadas> 
+    where <condición XPath>
+    order by <expresión>
+    return <expresión de salida>
+
+>[!NOTE]
+>**FOR** -> Dara tantas bueltas como recoje el XPath.
+>
+>Por cada buelta en **LET** podemos definir nuevas bariables que nos interesen.
+>
+>La clausura **WHERE** tiene la funcion de filtrar como en *SQL*.
+>
+>El **ORDEN BY** para colpocar cual es el orden de la salida de los datos.
+>
+>En **RETURN** expresamos que es lo que se va a mostrar .
+
+
+
+ejemplo :
+
+    for $empleado in //EMP_ROW
+    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+    where $empleado/EMP_NO
+    return $nombre_completo
