@@ -150,3 +150,8 @@ Mostrar el empleado que mas cobra:
     let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
     where $empleado/SALARIO = max(//SALARIO)
     return $empleado
+    ----
+    for $empleado in //EMP_ROW
+    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+    where $empleado/SALARIO = max(//SALARIO) or $empleado/SALARIO = min(//SALARIO)
+    return $empleado
