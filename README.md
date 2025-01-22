@@ -1,6 +1,6 @@
 # BASE-X_LENGUAJES
 Se emplea el lenguaje XML 
-[[https://github.com/eXist-db/exist/releases]]
+
 
 ## Comandos
 
@@ -97,9 +97,15 @@ Muestra los distintos datos que tiene una bariable ej:
 
 
 
+----
 
+> [!NOTE] 
+>Este es otra aplicación para poder hacer las consultas
 
-
+[[https://github.com/eXist-db/exist/releases]]
+1. Descargamos el .jar
+2. Open java admin....
+3. Contraseña pasv0r
 
 
 
