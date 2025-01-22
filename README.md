@@ -137,8 +137,16 @@ Para hacer consultas de estilo *FLWOR* (LEIDO COMO FLOWER). A diferencia del XPa
 
 
 ejemplo :
+Mostrar nombre y Nº empleado de los distintos departamentos
 
     for $empleado in //EMP_ROW
     let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
     where $empleado/EMP_NO
     return $nombre_completo
+
+Mostrar el empleado que mas cobra:
+
+    for $empleado in //EMP_ROW
+    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+    where $empleado/SALARIO = max(//SALARIO)
+    return $empleado
