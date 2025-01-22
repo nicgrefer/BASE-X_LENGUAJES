@@ -107,6 +107,8 @@ Muestra los distintos datos que tiene una bariable ej:
 2. Open java admin....
 3. Contraseña pasv0r
 
+>[!TIP]
+> Para añadir un archibo **XML** --> Crear nueva coleccion (aagregar nombre) --> Almacenar uno o mas ficheros (estando dentro de le coleccion) --> Usar los prismaticos para hacer consultas   
 
 
 
