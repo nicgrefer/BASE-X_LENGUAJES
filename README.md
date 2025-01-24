@@ -1,6 +1,9 @@
 # BASE-X_LENGUAJES
 Se emplea el lenguaje XML 
 
+>[!NOTE]
+>Tadas las consultas se basan en el script que hay en el [GitHub](https://github.com/nicgrefer/BASE-X_LENGUAJES/tree/main/FicherosXML)
+
 
 ## Comandos
 
@@ -159,3 +162,47 @@ Mostrar el empleado que mas cobra:
     for $oficios in distinct-values(//OFICIO)
     let $num_emple:=count(//EMP_ROW[OFICIO=$oficios])
     return concat($oficios,'-',$num_emple)
+
+
+## Formatear salida de pantalla
+
+
+Podemos *formatear* la salida como en el siguiente ejemplo:
+
+    for $emp in /EMPLEADOS/EMP_ROW
+    let $nom:=$emp/APELLIDO, $ofi:=$emp/OFICIO
+    return <APEOFI>{concat($nom,' ',$ofi)}</APEOFI>
+
+Se emplea el `APEOFI` y es importante poner entre las `{}` lo que quieras que se *lea* o *use* para representar la consulta
+
+
+
+## Para filtrar por atributo...
+
+En el `where` ponemos **`@xxxx=xx`** para poder buscar 
+
+    for $dep in /universidad/departamento
+    where $dep[@tipo='A']
+    return $dep
+
+### if-then-else
+Tambie se puede hacer poner  condiciones como `if` `them` o `else` para hacer las condiciones 
+ 
+    for $dep in /universidad/departamento
+    return if( $dep[@tipo='A'])
+      then $dep/nombre
+    else ()
+
+Por lo tanto, tambie se puede anidar `il-else` como se puede ver en este ejemplo:
+
+    for $dep in /universidad/departamento
+    return if ($dep/@tipo='A' )
+    	then <tipoA>{data($dep/nombre)}</tipoA>
+    	else if ($dep/@tipo='B')
+    	then <tipoB>{data($dep/nombre)}</tipoB>
+    	else ()
+
+
+
+
+
