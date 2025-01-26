@@ -4,6 +4,8 @@ Se emplea el lenguaje XML
 >[!NOTE]
 >Tadas las consultas se basan en el script que hay en el [GitHub](https://github.com/nicgrefer/BASE-X_LENGUAJES/tree/main/FicherosXML)
 
+> [!TIP]
+> Todas las funciones que se ve acontinuación sirve para los 2 *merados* que aparece en el `readme`
 
 ## Comandos
 
@@ -106,9 +108,9 @@ Muestra los distintos datos que tiene una bariable ej:
 >Este es otra aplicación para poder hacer las consultas
 
 [[https://github.com/eXist-db/exist/releases]]
+
 1. Descargamos el .jar
 2. Open java admin....
-3. Contraseña Pasv0r
 
 >[!TIP]
 > Para añadir un archibo **XML** --> Crear nueva coleccion (aagregar nombre) --> Almacenar uno o mas ficheros (estando dentro de le coleccion) --> Usar los prismaticos para hacer consultas   
@@ -137,6 +139,13 @@ Para hacer consultas de estilo *FLWOR* (LEIDO COMO FLOWER). A diferencia del XPa
 >
 >En **RETURN** expresamos que es lo que se va a mostrar .
 
+| Cláusula     | Función                                      |
+| ------------ | -------------------------------------------- |
+| **FOR**      | Recorre los elementos de la consulta XPath   |
+| **LET**      | Define variables auxiliares dentro del ciclo |
+| **WHERE**    | Filtra los resultados según una condición    |
+| **ORDER BY** | Ordena los resultados                        |
+| **RETURN**   | Define la estructura de salida               |
 
 
 ejemplo :
