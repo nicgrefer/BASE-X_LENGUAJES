@@ -2,9 +2,9 @@
 >1
 >Obtén por cada zona el número de productos que tiene.
 
-		for $zona in distinct-values(/productos/produc/cod_zona)
-		let $numProductos := count(/productos/produc[cod_zona = $zona])
-		return ('Zona ',$zona,'Num productos',$numProductos,' ')
+	for $cod in distinct-values(//cod_zona)
+	let $num:= sum(//produc[cod_zona=$cod]/stock_actual)
+	return concat ($cod, " - ",$num)
 
 >2
 >Obtén la denominación de los productos entres las etiquetas <zona10></zona10> si son del código de zona 10, <zona20></zona20> si son de la zona 20, <zona30></zona30> si son de la 30 y <zona40></zona40> si son de la 40.
