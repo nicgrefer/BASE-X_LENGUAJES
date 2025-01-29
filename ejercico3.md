@@ -49,11 +49,11 @@
 
 	for $denominacion in distinct-values(/productos/produc/denominacion)
 	return
-		 if (contains($denominacion, 'Placa Base')) then
-		        <placa>{('Denominación ', $denominacion, ' ')}</placa>
-		    else if (contains($denominacion, 'Memoria')) then
-		        <memoria>{('Denominación ', $denominacion, ' ')}</memoria>
-		    else if (contains($denominacion, 'Micro')) then
-		        <micro>{('Denominación ', $denominacion, ' ')}</micro>
-		    else
+		if (contains($denominacion, 'Placa Base'))
+   			then <placa>{('Denominación ', $denominacion, ' ')}</placa>
+		else if (contains($denominacion, 'Memoria'))
+		         then <memoria>{('Denominación ', $denominacion, ' ')}</memoria>
+		else if (contains($denominacion, 'Micro')) 
+		        then <micro>{('Denominación ', $denominacion, ' ')}</micro>
+		else
 		        <otros>{('Denominación ', $denominacion, ' ')}</otros>
