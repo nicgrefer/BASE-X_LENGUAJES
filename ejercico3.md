@@ -11,17 +11,14 @@
 >2
 >Obtén la denominación de los productos entres las etiquetas <zona10></zona10> si son del código de zona 10, <zona20></zona20> si son de la zona 20, <zona30></zona30> si son de la 30 y <zona40></zona40> si son de la 40.
 
-	for $zona in distinct-values(/productos/produc/cod_zona)
-	let $numProductos := count(/productos/produc[cod_zona = $zona])
-	return if ($zona = '10')
-		then <zona10>{('Zona ', $zona, 'Num productos ', $numProductos, ' ')}</zona10>
-		else if ($zona = '20')
-		then <zona20>{('Zona ', $zona, 'Num productos ', $numProductos, ' ')}</zona20>
-		else if ($zona = '30')
-		then <zona30>{('Zona ', $zona, 'Num productos ', $numProductos, ' ')}</zona30>
-		else if ($zona = '40')
-		then <zona40>{('Zona ', $zona, 'Num productos ', $numProductos, ' ')}</zona40>
-		else()
+	for $sucursal in /sucursales/sucursal
+	let $director := $sucursal/director
+	let $poblacion := $sucursal/poblacion
+	let $debe := $sucursal/cuenta/saldodebe
+	let $totalDebe := sum($debe)
+	let $hay := $sucursal/cuenta/saldohaber
+	let $totalHay := sum($hay)
+	return concat("Sucursal con director ", $director," y codigo ",$sucursal/@codigo, "en población ", $poblacion, " y un total de saldo debe de ", $totalDebe, " y tiene un saldo total de ", $totalHay)
 
 >3
 >Obtén por cada zona la denominación del o de los productos más caros.
@@ -100,8 +97,9 @@
 	return concat("En la sucursal con codigo ", $sucursal/@codigo," con saldo mayor de 'debe' es ", $debe)
 
  >5
->
+> Devuelve la cuenta del tipo PENSIONES que ha hecho más aportación
 
 	for $sucursal in /sucursales/sucursal
-	let $aport := max ($sucursal/cuenta/aportacion [@tipo='PENSIONES'])
+	let $aport := max ($sucursal/cuenta[@tipo='PENSIONES']/aportacion )
 	return concat("En la sucursal con codigo ", $sucursal/@codigo," con aportación mayor  es ", $aport)
+ 
