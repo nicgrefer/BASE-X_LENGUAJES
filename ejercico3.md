@@ -1,4 +1,4 @@
-> [!NOTR]
+> [!NOTE]
 > Parte 1 del ejercicio -> Productos.xml
 
 >1
