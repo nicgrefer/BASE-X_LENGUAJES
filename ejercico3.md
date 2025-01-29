@@ -28,19 +28,19 @@
 	let $productosEnZona := /productos/produc[cod_zona = $zona]
 	let $precioMax := max($productosEnZona/precio)
 	return  <producto>{concat('Zona ',$zona,'--',
-	        <productosMasCaros>
-	        {
-	            for $producto in $productosEnZona
-	            where $producto/precio = $precioMax
-	            return <producto>
-	            <denominacion>{ 
-	                $producto/denominacion }
-	            </denominacion>
-	            <precio>{
-	                 concat(' Precio -- ', $producto/precio ,'€' )}</precio>
-	            </producto>
-	        }
-	    </productosMasCaros>)}
+	 	<productosMasCaros>
+		        {
+		            for $producto in $productosEnZona
+		            where $producto/precio = $precioMax
+		            return <producto>
+		            <denominacion>{ 
+		                $producto/denominacion }
+		            </denominacion>
+		            <precio>{
+		                 concat(' Precio -- ', $producto/precio ,'€' )}</precio>
+		            </producto>
+		        }
+		    	</productosMasCaros>)}
 	        </producto>
 
 
