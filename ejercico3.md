@@ -1,3 +1,5 @@
+> [!NOTR]
+> Parte 1 del ejercicio -> Productos.xml
 
 >1
 >Obtén por cada zona el número de productos que tiene.
@@ -57,3 +59,49 @@
 		        then <micro>{('Denominación ', $denominacion, ' ')}</micro>
 		else
 		        <otros>{('Denominación ', $denominacion, ' ')}</otros>
+
+>[!NOTE]
+> Parte 2 del ejercicio ->Sucursales.xml
+
+>1
+>Devuelve el código de sucursal y el número de cuentas que tiene de tipo AHORRO y de tipo PENSIONES
+
+	for $sucursal in /sucursales/sucursal
+	let $cuentaAhorro := count($sucursal/cuenta[ @tipo='AHORRO'])
+	let $cuentasPension := count($sucursal/cuenta[@tipo='PENSIONES'])
+	return concat("Sucursal ", $sucursal/@codigo , " tiene ", $cuentaAhorro, " cuentas de ahorro y ", $cuentasPension, " cuentas de pensiones")
+
+ >2
+>Devuelve por cada sucursal el código de sucursal, el director, la población, la suma del total debe y la suma del total haber de sus cuentas.
+
+	for $sucursal in /sucursales/sucursal
+	let $director := $sucursal/director
+	let $poblacion := $sucursal/poblacion
+	let $debe := $sucursal/cuenta/saldodebe
+	let $totalDebe := sum($debe)
+	let $hay := $sucursal/cuenta/saldohaber
+	let $totalHay := sum($hay)
+	return concat("Sucursal con director ", $director," y codigo ",$sucursal/@codigo, " tiene una población de ", $poblacion, " y un total de saldo debe de ", $totalDebe, " y tiene un saldo total de ", $totalHay)
+
+ >3
+>Devuelve el nombre de los directores, el código de sucursal y la población de las sucursales con más de 3 cuentas.
+	
+	for $sucursal in /sucursales/sucursal
+	let $cuenta := count($sucursal/cuenta)
+	let $poblacion := $sucursal/poblacion
+	  where $cuenta>3
+	return concat("Sucursal ", $sucursal/@codigo ," de la poblacion ",$poblacion ," tiene ", $cuenta, " cuentas" )
+
+>4
+> Devuelve por cada sucursal, el código de sucursal y los datos de las cuentas con más saldo debe.
+
+	for $sucursal in /sucursales/sucursal
+	let $debe := max ($sucursal/cuenta/saldodebe)
+	return concat("En la sucursal con codigo ", $sucursal/@codigo," con saldo mayor de 'debe' es ", $debe)
+
+ >5
+>
+
+	for $sucursal in /sucursales/sucursal
+	let $aport := max ($sucursal/cuenta/aportacion [@tipo='PENSIONES'])
+	return concat("En la sucursal con codigo ", $sucursal/@codigo," con aportación mayor  es ", $aport)
