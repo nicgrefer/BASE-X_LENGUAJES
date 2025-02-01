@@ -113,7 +113,7 @@ Muestra los distintos datos que tiene una bariable ej:
 2. Open java admin....
 
 >[!TIP]
-> Para añadir un archibo **XML** --> Crear nueva coleccion (aagregar nombre) --> Almacenar uno o mas ficheros (estando dentro de le coleccion) --> Usar los prismaticos para hacer consultas   
+> Para añadir un archibo **XML** --> Crear nueva coleccion (agregar nombre) --> Almacenar uno o mas ficheros (estando dentro de le coleccion) --> Usar los prismaticos para hacer consultas   
 
 ---
 
@@ -128,16 +128,7 @@ Para hacer consultas de estilo *FLWOR* (LEIDO COMO FLOWER). A diferencia del XPa
     order by <expresión>
     return <expresión de salida>
 
->[!NOTE]
->**FOR** -> Dara tantas bueltas como recoje el XPath.
->
->Por cada buelta en **LET** podemos definir nuevas bariables que nos interesen.
->
->La clausura **WHERE** tiene la funcion de filtrar como en *SQL*.
->
->El **ORDEN BY** para colpocar cual es el orden de la salida de los datos.
->
->En **RETURN** expresamos que es lo que se va a mostrar .
+## Funciones:
 
 | Cláusula     | Función                                      |
 | ------------ | -------------------------------------------- |
@@ -148,7 +139,22 @@ Para hacer consultas de estilo *FLWOR* (LEIDO COMO FLOWER). A diferencia del XPa
 | **RETURN**   | Define la estructura de salida               |
 
 
-ejemplo :
+## Estructura:
+
+Para *crear* variables se usa el simbolo del `$` como por ejemplo `$empleado` de esta forma todo lo que se ponga detras del nombre podra ser usado llamandolo con la *referencia* creada.
+En el caso del **`FOR`** despues de crear la variable, se tiene que poner `in` como se ve en el siguiente ejemplo:
+
+     for $empleado in //EMP_ROW
+
+Tambien otra cosa muy importante de su estructura es que a la hora de poner un **`LET`** y crear la variable se emplee la siguiente combinación de simbolos `:=` ej:
+
+    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+
+
+>[!NOTE]
+>Todas las funciones mencionadas anteriormente se siguen utilizando aquí también ya que tienen la misma vase
+
+ejemplos de consultas :
 Mostrar nombre y Nº empleado de los distintos departamentos
 
     for $empleado in //EMP_ROW
@@ -163,11 +169,18 @@ Mostrar el empleado que mas cobra:
     where $empleado/SALARIO = max(//SALARIO)
     return $empleado
 ----
+Mostrar el empleado que mas cobra y el que menos:
+
     for $empleado in //EMP_ROW
     let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
     where $empleado/SALARIO = max(//SALARIO) or $empleado/SALARIO = min(//SALARIO)
     return $empleado
 ----
+Mostrar cuantos empleados hay en cada oficio:
+
+>[!TIP]
+>Al poner **`distinct-values`** lo que conseguimos es obtener una lista de valores únicos del conjunto de nodos seleccionados, es decir que no se repitan ya que `distinct-values` traducido literalmente es `distintos valores`
+
     for $oficios in distinct-values(//OFICIO)
     let $num_emple:=count(//EMP_ROW[OFICIO=$oficios])
     return concat($oficios,'-',$num_emple)
@@ -175,27 +188,61 @@ Mostrar el empleado que mas cobra:
 
 ## Formatear salida de pantalla
 
+Igual que en cualquier lenguaje de consultas se puede formatear el estilo de salida.
+
 
 Podemos *formatear* la salida como en el siguiente ejemplo:
+
 
     for $emp in /EMPLEADOS/EMP_ROW
     let $nom:=$emp/APELLIDO, $ofi:=$emp/OFICIO
     return <APEOFI>{concat($nom,' ',$ofi)}</APEOFI>
 
-Se emplea el `APEOFI` y es importante poner entre las `{}` lo que quieras que se *lea* o *use* para representar la consulta
+Lo que se pone entre `< >` no es nada mas que el *nombre* que le damos a la etiqueta (del lenguage XML) que al egecutar la consulta aparecerá agrupando *la información*.
 
+Despues tenemos que usar los `{ }` que engloban las etiquetas y ya ponemos el **`concat`** que ya hemos estado usando anterior mente para poder mostrar alternando los datos con texto introducido para hacer la consulta seperandolo entre `,` y usando `" "` para poner lo que se va a mostrar textualmente
+
+A la hora de egecutar el script del ejemplo se ve de la siguiente forma: 
+
+
+    <APEOFI>SANCHEZ EMPLEADO</APEOFI>
+    <APEOFI>ARROYO VENDEDOR</APEOFI>
+    <APEOFI>SALA VENDEDOR</APEOFI>
+    .
+    .
+    .
 
 
 ## Para filtrar por atributo...
 
-En el `where` ponemos **`@xxxx=xx`** para poder buscar 
+### **Tipo 1**
+
+Aveces el la base de datos dentro de una etiqueta tenemos atributos como en el siguiente ejemplo:
+
+    <universidad>
+      <departamento telefono="112233" tipo="A">
+      <codigo>IFC1</codigo>
+       <nombre>Informática</nombre>
+       <empleado salario="2000">
+          <puesto>Asociado</puesto>
+          <nombre>Juan Parra</nombre>
+       </empleado>
+       <empleado salario="2300">
+          <puesto>Profesor</puesto>
+          <nombre>Alicia Martín</nombre>
+       </empleado>
+      </departamento>
+    </universidad>
+
+
+Por lo tanto en el  el `where` ponemos **`@xxxx=xx`** para poder buscar 
 
     for $dep in /universidad/departamento
     where $dep[@tipo='A']
     return $dep
 
-### if-then-else
-Tambie se puede hacer poner  condiciones como `if` `them` o `else` para hacer las condiciones 
+### **Tipo 2** if-then-else
+Tambie se puede hacer poner  condiciones como `if` `them` o `else` para hacer las condiciones pero estos se situan en la parte del `return`
  
     for $dep in /universidad/departamento
     return if( $dep[@tipo='A'])
@@ -212,6 +259,6 @@ Por lo tanto, tambie se puede anidar `il-else` como se puede ver en este ejemplo
     	else ()
 
 
-
+if...then --> si... entonces 
 
 
