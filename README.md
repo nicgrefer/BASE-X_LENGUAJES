@@ -128,15 +128,17 @@ Para hacer consultas de estilo *FLWOR* (LEIDO COMO FLOWER). A diferencia del XPa
     order by <expresión>
     return <expresión de salida>
 
-## Funciones:
+## 🔑 **Cláusulas y Funciones:**
 
-| Cláusula     | Función                                      |
-| ------------ | -------------------------------------------- |
-| **FOR**      | Recorre los elementos de la consulta XPath   |
-| **LET**      | Define variables auxiliares dentro del ciclo |
-| **WHERE**    | Filtra los resultados según una condición    |
-| **ORDER BY** | Ordena los resultados                        |
-| **RETURN**   | Define la estructura de salida               |
+| **Cláusula**  | **Función**                                  |
+| ------------- | -------------------------------------------- |
+| 🔄 `FOR`      | Recorre los elementos de la consulta XPath   |
+| 📝 `LET`      | Define variables auxiliares dentro del ciclo |
+| 🔍 `WHERE`    | Filtra los resultados según una condición    |
+| 📊 `ORDER BY` | Ordena los resultados                        |
+| 📦 `RETURN`   | Define la estructura de salida               |
+
+---
 
 
 ## Estructura:
@@ -154,39 +156,48 @@ Tambien otra cosa muy importante de su estructura es que a la hora de poner un *
 >[!NOTE]
 >Todas las funciones mencionadas anteriormente se siguen utilizando aquí también ya que tienen la misma vase
 
-ejemplos de consultas :
-Mostrar nombre y Nº empleado de los distintos departamentos
+📊 **Ejemplos de Consultas**
 
-    for $empleado in //EMP_ROW
-    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
-    where $empleado/EMP_NO
-    return $nombre_completo
+1️⃣ **Mostrar Nombre y Nº de Empleado:**
 
-Mostrar el empleado que mas cobra:
+```xquery
+for $empleado in //EMP_ROW
+let $nombre_completo := concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+where $empleado/EMP_NO
+return $nombre_completo
+```
 
-    for $empleado in //EMP_ROW
-    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
-    where $empleado/SALARIO = max(//SALARIO)
-    return $empleado
-----
-Mostrar el empleado que mas cobra y el que menos:
+2️⃣ **Empleado que Más Cobra:** 💰
 
-    for $empleado in //EMP_ROW
-    let $nombre_completo:=concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
-    where $empleado/SALARIO = max(//SALARIO) or $empleado/SALARIO = min(//SALARIO)
-    return $empleado
-----
-Mostrar cuantos empleados hay en cada oficio:
+```xquery
+for $empleado in //EMP_ROW
+let $nombre_completo := concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+where $empleado/SALARIO = max(//SALARIO)
+return $empleado
+```
+
+3️⃣ **Empleado que Más y Menos Cobra:** ⚖️
+
+```xquery
+for $empleado in //EMP_ROW
+let $nombre_completo := concat($empleado/APELLIDO, '-', $empleado/EMP_NO)
+where $empleado/SALARIO = max(//SALARIO) or $empleado/SALARIO = min(//SALARIO)
+return $empleado
+```
+
+4️⃣ **Cantidad de Empleados por Oficio:** 👥
 
 >[!TIP]
 >Al poner **`distinct-values`** lo que conseguimos es obtener una lista de valores únicos del conjunto de nodos seleccionados, es decir que no se repitan ya que `distinct-values` traducido literalmente es `distintos valores`
 
-    for $oficios in distinct-values(//OFICIO)
-    let $num_emple:=count(//EMP_ROW[OFICIO=$oficios])
-    return concat($oficios,'-',$num_emple)
+```xquery
+for $oficios in distinct-values(//OFICIO)
+let $num_emple := count(//EMP_ROW[OFICIO = $oficios])
+return concat($oficios, '-', $num_emple)
+```
 
 
-## Formatear salida de pantalla
+## 🎨 Formatear salida de pantalla
 
 Igual que en cualquier lenguaje de consultas se puede formatear el estilo de salida.
 
@@ -213,9 +224,9 @@ A la hora de egecutar el script del ejemplo se ve de la siguiente forma:
     .
 
 
-## Para filtrar por atributo...
+## 🔍 Para filtrar por atributo... 
 
-### **Tipo 1**
+### ✅ **Tipo 1** 📑
 
 Aveces el la base de datos dentro de una etiqueta tenemos atributos como en el siguiente ejemplo:
 
@@ -241,7 +252,7 @@ Por lo tanto en el  el `where` ponemos **`@xxxx=xx`** para poder buscar
     where $dep[@tipo='A']
     return $dep
 
-### **Tipo 2** if-then-else
+### ✅ **Tipo 2** if-then-else 🤔
 Tambie se puede hacer poner  condiciones como `if` `them` o `else` para hacer las condiciones pero estos se situan en la parte del `return`
  
     for $dep in /universidad/departamento
@@ -249,7 +260,7 @@ Tambie se puede hacer poner  condiciones como `if` `them` o `else` para hacer la
       then $dep/nombre
     else ()
 
-Por lo tanto, tambie se puede anidar `il-else` como se puede ver en este ejemplo:
+Por lo tanto, tambie se puede anidar 🔗 `il-else` como se puede ver en este ejemplo:
 
     for $dep in /universidad/departamento
     return if ($dep/@tipo='A' )
