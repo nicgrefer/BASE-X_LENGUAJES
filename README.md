@@ -156,9 +156,9 @@ Tambien otra cosa muy importante de su estructura es que a la hora de poner un *
 >[!NOTE]
 >Todas las funciones mencionadas anteriormente se siguen utilizando aquí también ya que tienen la misma vase
 
-📊 **Ejemplos de Consultas**
+### 📊 **Ejemplos de Consultas**
 
-1️⃣ **Mostrar Nombre y Nº de Empleado:**
+#### 1️⃣ **Mostrar Nombre y Nº de Empleado:**
 
 ```xquery
 for $empleado in //EMP_ROW
@@ -167,7 +167,7 @@ where $empleado/EMP_NO
 return $nombre_completo
 ```
 
-2️⃣ **Empleado que Más Cobra:** 💰
+#### 2️⃣ **Empleado que Más Cobra:** 💰
 
 ```xquery
 for $empleado in //EMP_ROW
@@ -176,7 +176,7 @@ where $empleado/SALARIO = max(//SALARIO)
 return $empleado
 ```
 
-3️⃣ **Empleado que Más y Menos Cobra:** ⚖️
+#### 3️⃣ **Empleado que Más y Menos Cobra:** ⚖️
 
 ```xquery
 for $empleado in //EMP_ROW
@@ -185,7 +185,7 @@ where $empleado/SALARIO = max(//SALARIO) or $empleado/SALARIO = min(//SALARIO)
 return $empleado
 ```
 
-4️⃣ **Cantidad de Empleados por Oficio:** 👥
+#### 4️⃣ **Cantidad de Empleados por Oficio:** 👥
 
 >[!TIP]
 >Al poner **`distinct-values`** lo que conseguimos es obtener una lista de valores únicos del conjunto de nodos seleccionados, es decir que no se repitan ya que `distinct-values` traducido literalmente es `distintos valores`
