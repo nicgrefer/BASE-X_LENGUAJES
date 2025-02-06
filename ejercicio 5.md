@@ -32,6 +32,29 @@
 
 # 3 Visualiza los nombres de productos con su nombre de zona. Utiliza dos for en la consulta.
 
-# 4 
+	for $productos in /productos
+	for $produc in $productos/produc
+	let $nombre := $produc/denominacion
+	let $zona := $produc/cod_zona
+	return concat("Producto ", $nombre," esta en la zona ",$zona)
 
-# 5
+# 4 Visualiza los nombres de productos con stockminimo > 5. su código de zona, su nombre y el director de esa zona. Utiliza dos for en la consulta
+
+	for $produc in /productos/produc
+	for $zona in /zonas/zona
+	where $produc/cod_zona = $zona/cod_zona and $produc/stock_actual > 5
+	let $nombre := $produc/denominacion
+	let $cod_zona := $produc/cod_zona
+	let $director := $zona/director
+	return concat("Producto ", $nombre, " está en la zona ", $cod_zona, " cuyo director es ", $director)
+
+# 5 Mostrar el nombre de la zona, y la denominación de los productos cuyos precios superar la media de los productos de esa zona.
+
+	for $zona in /zonas/zona
+	let $productosZona := /productos/produc[cod_zona = $zona/cod_zona]
+	let $precioMedio := avg($productosZona/precio)
+	for $produc in $productosZona
+	where $produc/precio > $precioMedio
+	let $nombre := $produc/denominacion
+	let $nombreZona := $zona/nombre
+	return concat("Producto ", $nombre, " está en la zona ", $nombreZona)
