@@ -25,7 +25,12 @@
 
 # 2 Obtén por cada sucursal el nombre de la cuenta del tipo AHORRO cuyo saldo debe sea el máxima 
 
-# 3
+    for $suc in //sucursal
+    for $cuenta in $suc/cuenta[@tipo = 'AHORRO']
+    return concat("Nombre: ", $cuenta/nombre)
+
+
+# 3 Visualiza los nombres de productos con su nombre de zona. Utiliza dos for en la consulta.
 
 # 4 
 
