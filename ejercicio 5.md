@@ -25,20 +25,41 @@
 
 # 2 Obtén por cada sucursal el nombre de la cuenta del tipo AHORRO cuyo saldo debe sea el máxima 
 
-    for $suc in //sucursal
-    for $cuenta in $suc/cuenta[@tipo = 'AHORRO']
-    return concat("Nombre: ", $cuenta/nombre)
+	for $suc in //sucursal
+	for $cuenta in $suc/cuenta[@tipo = 'AHORRO']
+	let $maxSal := max($suc/cuenta/saldodebe)
+	return if($cuenta/saldodebe = $maxSal)
+	then concat("Nombre: ", $cuenta/nombre)
 
 
 # 3 Visualiza los nombres de productos con su nombre de zona. Utiliza dos for en la consulta.
+> Metodo 1
 
-	for $productos in /productos
-	for $produc in $productos/produc
-	let $nombre := $produc/denominacion
-	let $zona := $produc/cod_zona
-	return concat("Producto ", $nombre," esta en la zona ",$zona)
+	for $productos in /productos/produc
+	for $zonas in /zonas/zona[cod_zona=$productos/cod_zona]/nombre
+	let $producto:= $productos/denominacion
+	return <XML>{$producto, $zonas} </XML>
+---
+> Metodo 2
+
+	for $prod in /productos/produc
+	for $zona in /zonas/zona
+	return if($prod/cod_zona = $zona/cod_zona)
+		then <producto>{$prod/denominacion, $zona/nombre, $zona/cod_zona}</producto>
+	else ()
+---
+> Metodo 3
+
+	for $nprod in (/productos/produc)
+	for $nzona in(/zonas/zona)
+	let $nprd:=($nprod/denominacion)
+	let $nzon:=($nzona/nombre)
+	where data($nprod/cod_zona)=data($nzona/cod_zona)
+	return ($nprd,$nzon)
+
 
 # 4 Visualiza los nombres de productos con stockminimo > 5. su código de zona, su nombre y el director de esa zona. Utiliza dos for en la consulta
+> Metodo 1 -> es poco eficiente ya que da mas bueltas de las necesarias aunque tambien este bien
 
 	for $produc in /productos/produc
 	for $zona in /zonas/zona
@@ -47,6 +68,17 @@
 	let $cod_zona := $produc/cod_zona
 	let $director := $zona/director
 	return concat("Producto ", $nombre, " está en la zona ", $cod_zona, " cuyo director es ", $director)
+
+ > Metodo 2 -> Menos recargado inclutendo filtros en los 'for'
+
+	for $produc in /productos/produc
+	for $zona in /zonas/zona
+	where $produc/cod_zona = $zona/cod_zona and $produc/stock_actual > 5
+	let $nombre := $produc/denominacion
+	let $cod_zona := $produc/cod_zona
+	let $director := $zona/director
+	return concat("Producto ", $nombre, " está en la zona ", $cod_zona, " cuyo director es ", $director)
+	
 
 # 5 Mostrar el nombre de la zona, y la denominación de los productos cuyos precios superar la media de los productos de esa zona.
 
