@@ -91,6 +91,46 @@
 	let $nombreZona := $zona/nombre
 	return concat("Producto ", $nombre, " está en la zona ", $nombreZona)
 
+ ---
+ 
+	for $zona in //zona
+	let $cod_zona := $zona/cod_zona
+	let $nombre_zona := $zona/nombre
+	let $media := round(avg(//produc[cod_zona=$cod_zona]/precio),2)
+	for $produc in //produc[cod_zona=$cod_zona]
+	let $precio_produc := $produc/precio
+	let $nombre_produc := $produc/denominacion
+	where $precio_produc > $media
+	return <producto>
+			<cod_zona>{data($cod_zona)}</cod_zona>
+			<nombre_zona>{data($nombre_zona)}</nombre_zona>
+			<nombre_produc>{data($nombre_produc)}</nombre_produc>
+			<precio_produc>{data($precio_produc)}</precio_produc>
+			<media>{data($media)}</media>
+	</producto>
+
+---
+	<resultado>
+	{
+	for $zona in //zona
+	let $cod_zona := $zona/cod_zona
+	let $nombre_zona := $zona/nombre
+	let $media := round(avg(//produc[cod_zona=$cod_zona]/precio),2)
+	for $produc in //produc[cod_zona=$cod_zona]
+	let $precio_produc := $produc/precio
+	let $nombre_produc := $produc/denominacion
+	where $precio_produc > $media
+	return <producto>
+			{$cod_zona, $nombre_zona}
+			<nombre_produc>{data($nombre_produc)}</nombre_produc>
+			<precio_produc>{data($precio_produc)}</precio_produc>
+			<media>{data($media)}</media>
+	</producto>
+	}
+	</resultado>
+	
+
+
 # 6 Mostrar el nombre de zona y el precio medio de cada zona y todos los nombres de productos que están por debajo de ese precio medio de zona
 
 	for $zona in distinct-values(//produc/cod_zona)
