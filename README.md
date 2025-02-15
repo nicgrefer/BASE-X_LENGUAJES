@@ -273,3 +273,4 @@ Por lo tanto, tambie se puede anidar 🔗 `il-else` como se puede ver en este ej
 if...then --> si... entonces 
 
 
+[te puede interesar este articulo](https://sarreplec.caib.es/pluginfile.php/9746/mod_resource/content/3/AD06_contenidos_Web/3_base_de_datos_exist.html)
