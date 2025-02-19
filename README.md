@@ -275,16 +275,18 @@ if...then --> si... entonces
 
 [te puede interesar este articulo](https://sarreplec.caib.es/pluginfile.php/9746/mod_resource/content/3/AD06_contenidos_Web/3_base_de_datos_exist.html)
 
-# Modificar los datos con Modificaciones, inserciones, actualizaciones
-## 📌 **1. Inserción de datos (`insert`)**
-Permite agregar nuevos elementos, atributos o nodos a un documento XML.  
+# 📌 Modificación de datos en eXist-db
 
-🛠 **Sintaxis:**  
+## 1️⃣ **Inserción de datos (`insert node`)**
+Permite agregar nuevos elementos, atributos o nodos a un documento XML.
+
+### 🛠 **Sintaxis:**
 ```xquery
 insert node <nuevoNodo> into //padre
 ```
-👉 **Ejemplo:**  
-Supongamos que tenemos este XML de una biblioteca 📚:  
+
+### 👉 **Ejemplo:**
+Supongamos que tenemos este XML de una biblioteca 📚:
 ```xml
 <biblioteca>
    <libro>
@@ -292,11 +294,12 @@ Supongamos que tenemos este XML de una biblioteca 📚:
    </libro>
 </biblioteca>
 ```
-Ahora queremos **insertar** un nuevo libro. 📖  
+Ahora queremos **insertar** un nuevo libro. 📖
 ```xquery
+declare updating;
 insert node <libro><titulo>1984</titulo></libro> into //biblioteca
 ```
-📌 **Resultado:**  
+### 📌 **Resultado:**
 ```xml
 <biblioteca>
    <libro>
@@ -311,12 +314,13 @@ insert node <libro><titulo>1984</titulo></libro> into //biblioteca
 
 ---
 
-## ✏️ **2. Modificación de datos (`replace value of node` o `rename`)**
-Permite cambiar el valor de un nodo o su nombre.  
+## 2️⃣ **Modificación de datos (`update value` y `rename node`)**
+Permite cambiar el valor de un nodo o su nombre.
 
-🔄 **Modificar el contenido de un nodo:**  
+### 🔄 **Modificar el contenido de un nodo:**
 ```xquery
-replace value of node //libro[titulo="1984"]/titulo with "Un mundo feliz"
+declare updating;
+update value //libro[titulo="1984"]/titulo with "Un mundo feliz"
 ```
 🔹 Ahora el XML queda así:
 ```xml
@@ -330,22 +334,24 @@ replace value of node //libro[titulo="1984"]/titulo with "Un mundo feliz"
 </biblioteca>
 ```
 
-📛 **Renombrar un nodo:**  
+### 📛 **Renombrar un nodo:**
 ```xquery
+declare updating;
 rename node //libro/titulo as "nombre"
 ```
 🔹 Ahora el **nodo `<titulo>` cambia a `<nombre>`**. 🤯
 
 ---
 
-## 🗑 **3. Eliminación de datos (`delete`)**
+## 3️⃣ **Eliminación de datos (`delete node`)**
 Si necesitas eliminar un nodo o un conjunto de datos. 🚮  
 
-👉 **Ejemplo: eliminar un libro en específico**  
+### 👉 **Ejemplo: eliminar un libro en específico**  
 ```xquery
+declare updating;
 delete node //libro[titulo="El principito"]
 ```
-🛑 **Resultado:**  
+### 🛑 **Resultado:**  
 ```xml
 <biblioteca>
    <libro>
@@ -357,15 +363,16 @@ delete node //libro[titulo="El principito"]
 
 ---
 
-## 🔄 **4. Actualización combinada (`update replace`)**
-Permite **reemplazar completamente** un nodo por otro.  
+## 4️⃣ **Actualización combinada (`update replace`)**
+Permite **reemplazar completamente** un nodo por otro.
 
-📌 **Ejemplo:**  
+### 📌 **Ejemplo:**  
 ```xquery
-update replace //libro[titulo="Un mundo feliz"] 
+declare updating;
+update replace //libro[titulo="Un mundo feliz"]
 with <libro><titulo>Fahrenheit 451</titulo></libro>
 ```
-✅ **Ahora el XML queda así:**  
+### ✅ **Ahora el XML queda así:**  
 ```xml
 <biblioteca>
    <libro>
@@ -379,7 +386,10 @@ with <libro><titulo>Fahrenheit 451</titulo></libro>
 
 ### 🎯 **Resumen rápido**
 ✅ **`insert node`** → Inserta un nuevo nodo 📌  
-✅ **`replace value of node`** → Cambia el contenido de un nodo ✏️  
+✅ **`update value`** → Cambia el contenido de un nodo ✏️  
 ✅ **`rename node`** → Cambia el nombre de un nodo 🔤  
 ✅ **`delete node`** → Elimina un nodo ❌  
 ✅ **`update replace`** → Reemplaza un nodo completamente 🔄  
+
+🚀 ¡Ahora estos comandos funcionan correctamente en eXist-db! 🎉
+
