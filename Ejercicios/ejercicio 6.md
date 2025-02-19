@@ -9,10 +9,11 @@
     </EMP_ROW> into //EMPLEADOS
 
 # El empleado 7902 ha causado baja en la empresa, sustitúyelo por el siguiente
-    update replace 
-    //EMP_ROW[EMP_NO = 7902]
-    with
-     <EMP_ROW>
+    for $emp in //EMPLEADOS/EMP_ROW[EMP_NO=7902]
+    return update replace 
+    $emp
+    with 
+    <EMP_ROW>
      <EMP_NO>8043</EMP_NO>
      <APELLIDO>González</APELLIDO>
      <OFICIO>Programador</OFICIO>
@@ -20,7 +21,7 @@
      <FECHA_ALT>2013-05-23</FECHA_ALT>
      <SALARIO>2800</SALARIO>
      <DEPT_NO>60</DEPT_NO>
-     </EMP_ROW>
+    </EMP_ROW> 
 # Añade el departamento 60 , que es de informática y está en Valladolid
      update insert
     <DEP_ROW>
