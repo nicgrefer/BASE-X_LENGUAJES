@@ -30,3 +30,18 @@
     <LOC>VALLADOLID</LOC> 
     </DEP_ROW>
     into //departamentos
+
+# Actualiza el salario de los empleados del departamento con código de departamento 20. Suma al salario 100.
+    
+    for $salario in //EMPLEADOS/EMP_ROW[DEPT_NO=20]/SALARIO
+    let $nuevoSalario := $salario + 100
+    return update value $salario with $nuevoSalario
+    ------
+    for $dep in //EMP_ROW[DEPT_NO='20']
+    return 
+    update value $dep/SALARIO
+    with $dep/SALARIO + 100
+
+
+# Renombra el nodo DEP_ROW del documento departamentos.xml por filadepar
+
