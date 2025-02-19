@@ -275,121 +275,170 @@ if...then --> si... entonces
 
 [te puede interesar este articulo](https://sarreplec.caib.es/pluginfile.php/9746/mod_resource/content/3/AD06_contenidos_Web/3_base_de_datos_exist.html)
 
-# 📌 Modificación de datos en eXist-db
+# 🔍📄 Generar un HTML o XML a partir de una consulta XQuery 💡
 
-## 1️⃣ **Inserción de datos (`insert node`)**
-Permite agregar nuevos elementos, atributos o nodos a un documento XML.
+Al realizar las consultas, podemos configurar el `return` para que nos proporcione un `HTML` o `XML`. Esto nos permite utilizar los resultados directamente en páginas web, como en el siguiente ejemplo:
 
-### 🛠 **Sintaxis:**
+## Código XQuery para generar una tabla HTML con datos de empleados y departamentos 🏢💼
+
 ```xquery
-insert node <nuevoNodo> into //padre
+<HTML>
+<BODY>
+<table>
+{
+  for $dept in (//DEP_ROW)
+  let $nodept := $dept/DEPT_NO,
+      $nomdep := $dept/DNOMBRE
+  for $emple in (//EMP_ROW[DEPT_NO=$nodept])
+  let $empleado := $emple/APELLIDO
+  return <tr><td>{data($nodept)}</td><td>{data($nomdep)}</td><td>{data($empleado)}</td></tr>
+}
+</table>
+</BODY>
+</HTML>
 ```
 
-### 👉 **Ejemplo:**
-Supongamos que tenemos este XML de una biblioteca 📚:
-```xml
-<biblioteca>
-   <libro>
-      <titulo>El principito</titulo>
-   </libro>
-</biblioteca>
-```
-Ahora queremos **insertar** un nuevo libro. 📖
-```xquery
-insert node <libro><titulo>1984</titulo></libro> into //biblioteca
-```
-### 📌 **Resultado:**
-```xml
-<biblioteca>
-   <libro>
-      <titulo>El principito</titulo>
-   </libro>
-   <libro>
-      <titulo>1984</titulo>
-   </libro>
-</biblioteca>
-```
-🔹 ¡Se agregó el nuevo libro correctamente! 🎉  
+### 📌 Explicación 📌
+
+Antes de analizar el código, es importante comprender cómo se estructuran los datos y qué resultados esperamos obtener. A continuación, se explica paso a paso el funcionamiento de la consulta:
+
+- Se recorre cada departamento (`DEP_ROW`).
+- Se extraen los datos del número de departamento (`DEPT_NO`) y su nombre (`DNOMBRE`).
+- Luego, se buscan los empleados (`EMP_ROW`) que pertenecen a ese departamento.
+- Se genera una tabla HTML con filas (`<tr>`) y columnas (`<td>`) donde se incluyen los datos del departamento y los empleados asociados. 🎯✅📊
 
 ---
 
-## 2️⃣ **Modificación de datos (`update value` y `rename node`)**
-Permite cambiar el valor de un nodo o su nombre.
+## 📊💰 Obtener el empleado con mayor salario en cada departamento 🏆
 
-### 🔄 **Modificar el contenido de un nodo:**
+
 ```xquery
-for $titulo in //libro[titulo="1984"]/titulo
-return update value $titulo with "Un mundo feliz"
-```
-🔹 Ahora el XML queda así:
-```xml
-<biblioteca>
-   <libro>
-      <titulo>El principito</titulo>
-   </libro>
-   <libro>
-      <titulo>Un mundo feliz</titulo>
-   </libro>
-</biblioteca>
+for $dept in (//DEP_ROW)
+let $nodept := $dept/DEPT_NO,
+    $nomdep := $dept/DNOMBRE,
+    $emplecaro := //EMP_ROW[SALARIO=max(//EMP_ROW[DEPT_NO=$nodept]/SALARIO) and DEPT_NO=$nodept]/APELLIDO
+return
+<res>
+  <dept>{data($nomdep)}</dept>
+  <nodept>{data($nodept)}</nodept>
+  <empleados>
+  {
+    for $apellido in $emplecaro
+    return concat($apellido, ' , ')
+  }
+  </empleados>
+</res>
 ```
 
-### 📛 **Renombrar un nodo:**
-```xquery
-for $titulo in //libro/titulo
-return rename node $titulo as "nombre"
-```
-🔹 Ahora el **nodo `<titulo>` cambia a `<nombre>`**. 🤯
+### 📌 Explicación 📌
+
+- Se recorre cada departamento (`DEP_ROW`).
+- Se extraen su número (`DEPT_NO`) y nombre (`DNOMBRE`).
+- Se busca el empleado con el salario más alto dentro del departamento. 💵📊
+- Se genera un XML con el departamento y los empleados con el mayor salario. 🏅📄💡
 
 ---
 
-## 3️⃣ **Eliminación de datos (`delete node`)**
-Si necesitas eliminar un nodo o un conjunto de datos. 🚮  
+# 🔧🔄 Modificaciones en Exist DB con XQuery Update Facility 🔄💻
 
-### 👉 **Ejemplo: eliminar un libro en específico**  
+XQuery Update Facility proporciona una forma eficiente de modificar datos en bases de datos XML dentro de Exist DB. Estas operaciones permiten insertar, actualizar y eliminar datos sin necesidad de reescribir el documento completo. A continuación, se presentan algunas de las modificaciones más comunes que se pueden realizar en Exist DB.
+
+## **📥 Insertar nodos** 🆕📌
+
+### Insertar un nuevo nodo dentro de `zonas` 🏙️📝
+
 ```xquery
-for $libro in //libro[titulo="El principito"]
-return delete node $libro
+update insert
+<zona>
+  <codzona>50</codzona>
+  <nombre>Madrid-OESTE</nombre>
+  <director>Alicia Ramos Martin</director>
+</zona>
+into //zonas
 ```
-### 🛑 **Resultado:**  
-```xml
-<biblioteca>
-   <libro>
-      <titulo>Un mundo feliz</titulo>
-   </libro>
-</biblioteca>
+
+### Insertar un nodo después de otro nodo ➕📄
+
+```xquery
+update insert
+<zona>
+  <codzona>50</codzona>
+  <nombre>Madrid-OESTE</nombre>
+  <director>Alicia Ramos Martin</director>
+</zona>
+following //zona[cod_zona=40]
 ```
-🔹 ¡El libro fue eliminado! ❌📚  
+
+### Insertar un nodo antes de otro nodo 🔄📂
+
+```xquery
+update insert
+<zona>
+  <codzona>50</codzona>
+  <nombre>Madrid-OESTE</nombre>
+  <director>Alicia Ramos Martin</director>
+</zona>
+preceding //zona[cod_zona=40]
+```
 
 ---
 
-## 4️⃣ **Actualización combinada (`update replace`)**
-Permite **reemplazar completamente** un nodo por otro.
+## **🔄 Reemplazar nodos** 🏗️
 
-### 📌 **Ejemplo:**  
+Reemplazar nodos en Exist DB con XQuery Update Facility permite modificar estructuras XML sin necesidad de borrar y volver a insertar datos manualmente. Esto es útil cuando se requiere actualizar la estructura de un documento XML manteniendo su integridad.
+
+### Reemplazar un nodo completo 🔧
+
 ```xquery
-for $libro in //libro[titulo="Un mundo feliz"]
-return update replace $libro 
-with <libro><titulo>Fahrenheit 451</titulo></libro>
+update replace
+/zonas/zona[cod_zona=40]/director
+with <directora>Pilar Martin Ramos</directora>
 ```
-### ✅ **Ahora el XML queda así:**  
-```xml
-<biblioteca>
-   <libro>
-      <titulo>Fahrenheit 451</titulo>
-   </libro>
-</biblioteca>
-```
-📌 Se reemplazó todo el nodo `<libro>` anterior. 🔄🔥  
 
 ---
 
-### 🎯 **Resumen rápido**
-✅ **`insert node`** → Inserta un nuevo nodo 📌  
-✅ **`update value`** → Cambia el contenido de un nodo ✏️  
-✅ **`rename node`** → Cambia el nombre de un nodo 🔤  
-✅ **`delete node`** → Elimina un nodo ❌  
-✅ **`update replace`** → Reemplaza un nodo completamente 🔄  
+## **✏️ Reemplazar valores de nodos** 🔢
 
-🚀 ¡Ahora estos comandos funcionan correctamente en eXist-db! 🎉
+Cuando solo necesitamos modificar el contenido de un nodo sin cambiar su estructura, podemos utilizar `update value`. Esta operación es eficiente y evita la necesidad de manipular toda la jerarquía XML.
+
+### Modificar el valor de un nodo sin cambiar su estructura 🏗️📋
+
+```xquery
+update value
+//zona[cod_zona=40]/director
+with 'Pilar Martín Ramos'
+```
+
+---
+
+## **🔠 Reemplazar valores de atributos** 📌
+
+A veces, en lugar de modificar un nodo completo, es suficiente actualizar el valor de un atributo específico. Esto se logra con `update value`, permitiendo ajustes precisos en la información almacenada en XML.
+
+### Modificar el valor de un atributo 🎯🔢
+
+```xquery
+update value
+//zona[cod_zona=40]/cod_zona/@ciudad
+with 'Granada'
+```
+
+---
+
+## **📜📌 Resumen de operaciones XQuery en Exist DB** 🛠️🚀
+
+| Operación                             | Código XQuery                         |
+| ------------------------------------- | ------------------------------------- |
+| **Insertar un nodo** dentro de otro   | `update insert ... into ...`          |
+| **Insertar después de un nodo**       | `update insert ... following ...`     |
+| **Insertar antes de un nodo**         | `update insert ... preceding ...`     |
+| **Reemplazar un nodo**                | `update replace ... with ...`         |
+| **Modificar el valor de un nodo**     | `update value ... with ...`           |
+| **Modificar el valor de un atributo** | `update value .../@atributo with ...` |
+
+Esto te servirá como referencia rápida para trabajar con **XQuery y Exist DB**. 🚀💻📚
+
+Estas operaciones son fundamentales en la gestión de datos XML dentro de Exist DB. Dominar estos comandos te permitirá manipular estructuras de datos de manera eficiente en entornos reales, optimizando la administración y consulta de información. 📊✅
+
 
 
