@@ -274,3 +274,112 @@ if...then --> si... entonces
 
 
 [te puede interesar este articulo](https://sarreplec.caib.es/pluginfile.php/9746/mod_resource/content/3/AD06_contenidos_Web/3_base_de_datos_exist.html)
+
+# Modificar los datos con Modificaciones, inserciones, actualizaciones
+## 📌 **1. Inserción de datos (`insert`)**
+Permite agregar nuevos elementos, atributos o nodos a un documento XML.  
+
+🛠 **Sintaxis:**  
+```xquery
+insert node <nuevoNodo> into //padre
+```
+👉 **Ejemplo:**  
+Supongamos que tenemos este XML de una biblioteca 📚:  
+```xml
+<biblioteca>
+   <libro>
+      <titulo>El principito</titulo>
+   </libro>
+</biblioteca>
+```
+Ahora queremos **insertar** un nuevo libro. 📖  
+```xquery
+insert node <libro><titulo>1984</titulo></libro> into //biblioteca
+```
+📌 **Resultado:**  
+```xml
+<biblioteca>
+   <libro>
+      <titulo>El principito</titulo>
+   </libro>
+   <libro>
+      <titulo>1984</titulo>
+   </libro>
+</biblioteca>
+```
+🔹 ¡Se agregó el nuevo libro correctamente! 🎉  
+
+---
+
+## ✏️ **2. Modificación de datos (`replace value of node` o `rename`)**
+Permite cambiar el valor de un nodo o su nombre.  
+
+🔄 **Modificar el contenido de un nodo:**  
+```xquery
+replace value of node //libro[titulo="1984"]/titulo with "Un mundo feliz"
+```
+🔹 Ahora el XML queda así:
+```xml
+<biblioteca>
+   <libro>
+      <titulo>El principito</titulo>
+   </libro>
+   <libro>
+      <titulo>Un mundo feliz</titulo>
+   </libro>
+</biblioteca>
+```
+
+📛 **Renombrar un nodo:**  
+```xquery
+rename node //libro/titulo as "nombre"
+```
+🔹 Ahora el **nodo `<titulo>` cambia a `<nombre>`**. 🤯
+
+---
+
+## 🗑 **3. Eliminación de datos (`delete`)**
+Si necesitas eliminar un nodo o un conjunto de datos. 🚮  
+
+👉 **Ejemplo: eliminar un libro en específico**  
+```xquery
+delete node //libro[titulo="El principito"]
+```
+🛑 **Resultado:**  
+```xml
+<biblioteca>
+   <libro>
+      <titulo>Un mundo feliz</titulo>
+   </libro>
+</biblioteca>
+```
+🔹 ¡El libro fue eliminado! ❌📚  
+
+---
+
+## 🔄 **4. Actualización combinada (`update replace`)**
+Permite **reemplazar completamente** un nodo por otro.  
+
+📌 **Ejemplo:**  
+```xquery
+update replace //libro[titulo="Un mundo feliz"] 
+with <libro><titulo>Fahrenheit 451</titulo></libro>
+```
+✅ **Ahora el XML queda así:**  
+```xml
+<biblioteca>
+   <libro>
+      <titulo>Fahrenheit 451</titulo>
+   </libro>
+</biblioteca>
+```
+📌 Se reemplazó todo el nodo `<libro>` anterior. 🔄🔥  
+
+---
+
+### 🎯 **Resumen rápido**
+✅ **`insert node`** → Inserta un nuevo nodo 📌  
+✅ **`replace value of node`** → Cambia el contenido de un nodo ✏️  
+✅ **`rename node`** → Cambia el nombre de un nodo 🔤  
+✅ **`delete node`** → Elimina un nodo ❌  
+✅ **`update replace`** → Reemplaza un nodo completamente 🔄  
