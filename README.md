@@ -296,7 +296,6 @@ Supongamos que tenemos este XML de una biblioteca 📚:
 ```
 Ahora queremos **insertar** un nuevo libro. 📖
 ```xquery
-declare updating;
 insert node <libro><titulo>1984</titulo></libro> into //biblioteca
 ```
 ### 📌 **Resultado:**
@@ -319,8 +318,8 @@ Permite cambiar el valor de un nodo o su nombre.
 
 ### 🔄 **Modificar el contenido de un nodo:**
 ```xquery
-declare updating;
-update value //libro[titulo="1984"]/titulo with "Un mundo feliz"
+for $titulo in //libro[titulo="1984"]/titulo
+return update value $titulo with "Un mundo feliz"
 ```
 🔹 Ahora el XML queda así:
 ```xml
@@ -336,8 +335,8 @@ update value //libro[titulo="1984"]/titulo with "Un mundo feliz"
 
 ### 📛 **Renombrar un nodo:**
 ```xquery
-declare updating;
-rename node //libro/titulo as "nombre"
+for $titulo in //libro/titulo
+return rename node $titulo as "nombre"
 ```
 🔹 Ahora el **nodo `<titulo>` cambia a `<nombre>`**. 🤯
 
@@ -348,8 +347,8 @@ Si necesitas eliminar un nodo o un conjunto de datos. 🚮
 
 ### 👉 **Ejemplo: eliminar un libro en específico**  
 ```xquery
-declare updating;
-delete node //libro[titulo="El principito"]
+for $libro in //libro[titulo="El principito"]
+return delete node $libro
 ```
 ### 🛑 **Resultado:**  
 ```xml
@@ -368,8 +367,8 @@ Permite **reemplazar completamente** un nodo por otro.
 
 ### 📌 **Ejemplo:**  
 ```xquery
-declare updating;
-update replace //libro[titulo="Un mundo feliz"]
+for $libro in //libro[titulo="Un mundo feliz"]
+return update replace $libro 
 with <libro><titulo>Fahrenheit 451</titulo></libro>
 ```
 ### ✅ **Ahora el XML queda así:**  
@@ -392,4 +391,5 @@ with <libro><titulo>Fahrenheit 451</titulo></libro>
 ✅ **`update replace`** → Reemplaza un nodo completamente 🔄  
 
 🚀 ¡Ahora estos comandos funcionan correctamente en eXist-db! 🎉
+
 
