@@ -41,6 +41,11 @@
     return 
     update value $dep/SALARIO
     with $dep/SALARIO + 100
+    --------
+    for $dep in //EMP_ROW[DEPT_NO='20']
+    return 
+    update replace $dep/SALARIO
+    with <SALARIO>{$dep/SALARIO + 100}</SALARIO>
 
 
 # Renombra el nodo DEP_ROW del documento departamentos.xml por filadepar
