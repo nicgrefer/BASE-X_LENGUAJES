@@ -425,6 +425,7 @@ with 'Granada'
 
 ---
 
+
 ## **📜📌 Resumen de operaciones XQuery en Exist DB** 🛠️🚀
 
 | Operación                             | Código XQuery                         |
@@ -436,7 +437,55 @@ with 'Granada'
 | **Modificar el valor de un nodo**     | `update value ... with ...`           |
 | **Modificar el valor de un atributo** | `update value .../@atributo with ...` |
 
-Esto te servirá como referencia rápida para trabajar con **XQuery y Exist DB**. 🚀💻📚
+
+En **Exist DB**, para eliminar datos de un documento XML, se usa la operación `update delete`. Esto permite eliminar nodos completos o partes específicas de la estructura XML.
+
+---
+
+## **🗑️ Eliminar datos en Exist DB con XQuery Update Facility** ❌
+
+### **Eliminar un nodo completo**  
+Si queremos eliminar una zona con un código específico, usamos:
+
+```xquery
+update delete //zona[cod_zona=50]
+```
+🔹 Esto elimina por completo el nodo `<zona>` donde `cod_zona=50`.
+
+---
+
+### **Eliminar un nodo hijo sin borrar su padre**  
+Si queremos eliminar solo el director de una zona pero mantener la zona:
+
+```xquery
+update delete //zona[cod_zona=50]/director
+```
+🔹 Esto borra el nodo `<director>`, pero deja intacto el nodo `<zona>`.
+
+---
+
+### **Eliminar un atributo dentro de un nodo**  
+Si solo queremos eliminar un atributo sin borrar el nodo:
+
+```xquery
+update delete //zona[cod_zona=50]/@ciudad
+```
+🔹 Esto borra el atributo `ciudad` dentro del nodo `<zona>`.
+
+---
+
+## **📌 Resumen de eliminación en Exist DB**  
+
+| Operación                              | Código XQuery                        |
+|----------------------------------------|--------------------------------------|
+| **Eliminar un nodo completo**          | `update delete //nodo`              |
+| **Eliminar un nodo hijo**              | `update delete //nodo/hijo`         |
+| **Eliminar un atributo de un nodo**    | `update delete //nodo/@atributo`    |
+
+---
+
+🔹 **Nota:** En Exist DB, al eliminar datos no es necesario realizar una reconstrucción del documento, ya que `update delete` modifica directamente el XML. 
+
 
 Estas operaciones son fundamentales en la gestión de datos XML dentro de Exist DB. Dominar estos comandos te permitirá manipular estructuras de datos de manera eficiente en entornos reales, optimizando la administración y consulta de información. 📊✅
 
