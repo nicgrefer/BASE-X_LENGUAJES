@@ -48,31 +48,50 @@
     with <SALARIO>{$dep/SALARIO + 100}</SALARIO>
 
 
-# 5.Renombra el nodo DEP_ROW del documento departamentos.xml por filadepar (no acaba de funcionar)
+# 5.Renombra el nodo DEP_ROW del documento departamentos.xml por filadepar 
 
-    for $dep in //DEP_ROW
-    return
-      update replace $dep
-      with 
-      <filadepar>
-        <DEPT_NO>{ $dep/DEPT_NO/text() }</DEPT_NO>
-        <DNOMBRE>{ $dep/DNOMBRE/text() }</DNOMBRE>
-        <LOC>{ $dep/LOC/text() }</LOC>
-      </filadepar>
+    update rename /departamentos/DEP_ROW as 'filadepar'
 
 # 6.Borra todos los empleados que trabajen en Valladolid
 
-   for $emple in EMPLEADOS/EMP_ROW [DEPT_NO = departamentos/DEP_ROW[LOC ='Valladolid' ]/DEPT_NO]
-   ??¿
+   update delete 
+   //EMP_ROW[DEPT_NO=//DEP_ROW[LOC='VALLADOLID']/DEPT_NO]
+
+otra opción
+
+   for $dep in distinct-values(/EMPLEADOS/EMP_ROW/DEPT_NO)
+   for $depd in (/departamentos/DEP_ROW[LOC='VALLADOLID']/DEPT_NO)
+   return if($dep=$depd) then update delete /EMPLEADOS/EMP_ROW[DEPT_NO=$depd]
+   else()
+
+opción
+
+   for $emple in //departamentos/filadep[LOC='VALLADOLID']
+   let $dep:=$emple/DEPT_NO
+   return update delete /EMPLEADOS/fila_emple[DEPT_NO=$dep]
+
 
 # 7.Añade en departamentos un nuevo campo que muestre la media del salario de sus empleados en su departamento. (no funciona)
 
 
-   for $dept in departamentos/DEP_ROW
-   let $dept_no := $dept/DEPT_NO
-   let $avg_salary := avg(EMPLEADOS/EMP_ROW[DEPT_NO = $dept_no]/SALARIO)
-   return
-       update insert <AVG_SALARIO>{ $avg_salary }</AVG_SALARIO> into $dept
+   for $dep in distinct-values(/departamentos/DEP_ROW/DEPT_NO)
+   let $media:=avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
+   return update insert <media>{$media}</media> into /departamentos/DEP_ROW[DEPT_NO=$dep]
+
+o
+
+   for $dep in /departamentos/DEP_ROW
+   let $numdep:=data($dep/DEPT_NO), $sal:=avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$numdep]/SALARIO)
+   return update insert <media> {$sal} </media> into $dep
+
+o
+
+   for $dep in /departamentos/DEP_ROW
+   let $depno:= data($dep/DEPT_NO)
+   let $media:= avg(//EMP_ROW[DEPT_NO=$depno]/SALARIO)
+   return update insert <mediasalario>{$media}</mediasalario> into //$dep[DEPT_NO=$depno]
+
+
 
 
 
