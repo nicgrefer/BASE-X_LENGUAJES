@@ -71,7 +71,7 @@ opción
    return update delete /EMPLEADOS/fila_emple[DEPT_NO=$dep]
 
 
-# 7.Añade en departamentos un nuevo campo que muestre la media del salario de sus empleados en su departamento. (no funciona)
+# 7.Añade en departamentos un nuevo campo que muestre la media del salario de sus empleados en su departamento. 
 
 
    for $dep in distinct-values(/departamentos/DEP_ROW/DEPT_NO)
