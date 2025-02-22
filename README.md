@@ -1,6 +1,6 @@
 # BASE-X_LENGUAJES
-![MIT note](https://img.shields.io/badge/Lenguaje-XML-green.svg)<br>
-![MIT note](https://img.shields.io/badge/Teoria-yellow.svg)<br>
+![MIT note](https://img.shields.io/badge/Lenguaje-XML-green.svg)
+![MIT note](https://img.shields.io/badge/Teoria-yellow.svg)
 ![MIT note](https://img.shields.io/badge/Ejercicios-orange.svg)<br>
 Se emplea el lenguaje XML 
 
