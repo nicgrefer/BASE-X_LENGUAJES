@@ -445,7 +445,14 @@ with 'Granada'
 En **Exist DB**, para eliminar datos de un documento XML, se usa la operación `update delete`. Esto permite eliminar nodos completos o partes específicas de la estructura XML.
 
 ---
+## Renombrar una variable 
 
+````
+for $salario in /EMPLEADOS/EMP_ROW/SALARIO
+return update rename $salario as "SUELDO"
+````
+
+---
 ## **🗑️ Eliminar datos en Exist DB con XQuery Update Facility** ❌
 
 ### **Eliminar un nodo completo**  
