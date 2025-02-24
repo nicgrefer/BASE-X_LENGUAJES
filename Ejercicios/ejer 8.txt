@@ -1,0 +1,7 @@
+for $departamento in distinct-values(/EMPLEADOS/EMP_ROW/DEPT_NO)
+let $mediaDepart := avg(/EMPLEADOS/EMP_ROW[DEPT_NO = $departamento]/SALARIO)
+let $emple := /EMPLEADOS/EMP_ROW[DEPT_NO = $departamento]
+return if ($emple/
+
+
+<depart><emple>{$emple}</emple><salarioMedia>{$mediaDepart}</salarioMedia></depart>

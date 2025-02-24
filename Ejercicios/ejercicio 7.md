@@ -18,38 +18,25 @@
 
 # 3.Añadir a departamento una nueva etiqueta con el número de empleados que tiene cada departamento. <NUMEMPLE>x</NUMEMPLE>
 
-for $dep in distinct-values(/departamentos/DEP_ROW/DEPT_NO)
-let $media := avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
-return update insert <NUMEMPLE>{$media}</NUMEMPLE> into /departamentos/DEP_ROW[DEPT_NO=$dep]
+	for $dep in distinct-values(/departamentos/DEP_ROW/DEPT_NO)
+	let $media := avg(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
+	return update insert <NUMEMPLE>{$media}</NUMEMPLE> into /departamentos/DEP_ROW[DEPT_NO=$dep]
 
 # 4.Borrar al empleado que más cobra de cada departamento. 
 
+	for $dep in /departamentos/DEP_ROW/DEPT_NO
+	for $maxSal in max(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
+	return update delete /EMPLEADOS/EMP_ROW[SALARIO=$maxSal and DEPT_NO=$dep]
 
 
 # 5.Modificar la denominación de VENDEDOR por COMERCIAL
 
-
-
-> Comprender correccion
-
-4.-
-for $dep in /departamentos/DEP_ROW/DEPT_NO
-for $maxSal in max(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
-return update delete /EMPLEADOS/EMP_ROW[SALARIO=$maxSal and DEPT_NO=$dep]
-
-for $dep in /departamentos/DEP_ROW/DEPT_NO
-let $maxSal:=max(/EMPLEADOS/EMP_ROW[DEPT_NO=$dep]/SALARIO)
-return update delete /EMPLEADOS/EMP_ROW[SALARIO=$maxSal and DEPT_NO=$dep]
-
-
-
-5.-
-for $emp in /EMPLEADOS/EMP_ROW[OFICIO="VENDEDOR"]/OFICIO
-return update value $emp with 'COMERCIAL'
+	for $emp in /EMPLEADOS/EMP_ROW[OFICIO="VENDEDOR"]/OFICIO
+	return update value $emp with 'COMERCIAL'
 
 o 
-/EMPLEADOS/EMP_ROW[OFICIO="VENDEDOR"]/OFICIO
+	/EMPLEADOS/EMP_ROW[OFICIO="VENDEDOR"]/OFICIO
 
 O
 
-update value //EMP_ROW[OFICIO="VENDEDOR"]/OFICIO with 'COMERCIAL'
+	update value //EMP_ROW[OFICIO="VENDEDOR"]/OFICIO with 'COMERCIAL'
