@@ -346,7 +346,8 @@ return
 # 🔧🔄 Modificaciones en Exist DB con XQuery Update Facility 🔄💻
 
 >[!NOTE]
-> Todos estos `updates` se puede concadenar poniendo una `,` eg: `return (update rename //EMP_ROW[EMP_NO=$emp/EMP_NO] as $cadena , update delete $cod)`
+> Todos estos `updates` se puede concadenar poniendo una `,` eg: <br>
+> `return (update rename //EMP_ROW[EMP_NO=$emp/EMP_NO] as $cadena , update delete $cod)`
 
 XQuery Update Facility proporciona una forma eficiente de modificar datos en bases de datos XML dentro de Exist DB. Estas operaciones permiten insertar, actualizar y eliminar datos sin necesidad de reescribir el documento completo. A continuación, se presentan algunas de las modificaciones más comunes que se pueden realizar en Exist DB.
 
